@@ -1,0 +1,32 @@
+<?php
+
+namespace Database\Seeders;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Question;
+use Illuminate\Database\Seeder;
+
+
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
+    {
+
+        $this->call([MainMenuSeeder::class, 
+        SubMainMenuSeeder::class,
+         QuestionSeeder::class,
+        AnswerSeeder::class,
+        TagsSeeder::class,
+        SubMenuTagsSeeder::class,
+        BenefitSeeder::class,
+        MainArticleSeeder::class,
+        DiskonSeeder::class]);
+    }
+}
