@@ -12,6 +12,6 @@ class MainMenu extends Model
     protected $fillable = ['title'];
     
     public function subMainMenu(){
-        return $this->hasMany(SubMainMenu::class);
+        return $this->hasMany(SubMainMenu::class, 'main_menu_id');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\SubMenuTags;
+use App\Models\Tags;
 use Illuminate\Http\Request;
 
 class SubMainTagsController extends Controller
@@ -27,11 +28,18 @@ class SubMainTagsController extends Controller
      */
     public function store(Request $request)
     {
-          $data = SubMenuTags::create([
-            'tags_id' => $request->tags_id,
-            'sub_menu_id' => $request->sub_menu_id,
+        //   $data = SubMenuTags::create([
+        //     'tags_id' => $request->tags_id,
+        //     'sub_main_menus_id' => $request->sub_main_menus_id,
             
-        ]);
+        // ]);
+
+
+        $data = Tags::with('subMainMenu')->get();
+        $data->subMainMenu()->attach($request->sub_main_menus_id);
+
+
+        
       
         return $this->sendResponse($data, 'successful create data ');
     }
@@ -57,7 +65,7 @@ class SubMainTagsController extends Controller
     public function update(Request $request, SubMenuTags $subMenuTags)
     {
             $subMenuTags->tags_id= $request->tags_id;
-            $subMenuTags->sub_menu_id= $request->sub_menu_id;
+            $subMenuTags->sub_main_menus_id= $request->sub_main_menus_id;
             $subMenuTags->save();
 
           return $this->sendResponse($subMenuTags, 'successful update data');

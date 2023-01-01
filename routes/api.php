@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('mainMenu', MainMenuController::class);
 Route::apiResource('subMainMenu', SubMainMenuController::class);
 Route::apiResource('tags', TagsController::class);
-Route::apiResource('subMenuTags', SubMainTagsController::class);
+// Route::apiResource('subMenuTags', SubMainTagsController::class);
 Route::apiResource('questions', QuestionController::class);
 Route::apiResource('answer', AnswerController::class);
 Route::apiResource('benefit', BenefitController::class);

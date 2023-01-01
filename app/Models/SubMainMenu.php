@@ -9,7 +9,7 @@ class SubMainMenu extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['main_menu_id', 'title', 'content'];
+    protected $fillable = ['main_menu_id', 'title', 'content', ''];
 
     public function mainMenu() {
         return $this->belongsTo(MainMenu::class);
@@ -20,7 +20,7 @@ class SubMainMenu extends Model
     }
 
     public function tags(){
-        return $this->belongsToMany(Tags::class, 'sub_menu_tags');
+        return $this->belongsToMany(Tags::class, 'sub_menu_tags', 'sub_main_menus_id', 'tags_id' );
     }
 
     public function benefit(){

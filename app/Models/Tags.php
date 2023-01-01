@@ -12,6 +12,6 @@ class Tags extends Model
     protected $fillable = ['title'];
 
     public function subMainMenu(){
-        return $this->belongsToMany(SubMainMenu::class, 'sub_menu_tags');
+        return $this->belongsToMany(SubMainMenu::class, 'sub_menu_tags', 'tags_id', 'sub_main_menus_id' );
     }
 }

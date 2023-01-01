@@ -18,11 +18,11 @@ class SubMenuTagsSeeder extends Seeder
         $tagsWithSubMenu = [
             [
              'tags_id' => '1',
-             'sub_main_menu_id' => '1',
+             'sub_main_menus_id' => '1',
             ],
             [
                 'tags_id' => '2',
-                'sub_main_menu_id' => '1'
+                'sub_main_menus_id' => '1'
 
             ],
               [
@@ -32,31 +32,31 @@ class SubMenuTagsSeeder extends Seeder
               ],
                 [
                 'tags_id' => '2',
-                'sub_main_menu_id' => '2'
+                'sub_main_menus_id' => '2'
 
                 ],
                   [
                 'tags_id' => '1',
-                'sub_main_menu_id' => '3'
+                'sub_main_menus_id' => '3'
                   ],
                     [
                 'tags_id' => '2',
-                'sub_main_menu_id' => '3'
+                'sub_main_menus_id' => '3'
 
                     ],
                               [
                 'tags_id' => '3',
-                'sub_main_menu_id' => '2'
+                'sub_main_menus_id' => '2'
 
                               ],
                                         [
                 'tags_id' => '4',
-                'sub_main_menu_id' => '2'
+                'sub_main_menus_id' => '2'
 
                                         ],
                                                   [
                 'tags_id' => '5',
-                'sub_main_menu_id' => '3'
+                'sub_main_menus_id' => '3'
 
             ]
             ];

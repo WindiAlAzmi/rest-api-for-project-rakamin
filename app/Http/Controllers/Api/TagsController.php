@@ -27,10 +27,11 @@ class TagsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = Tags::create([
-            'title' => $request->title,
-        ]);
-      
+        $data = new Tags();
+        $data->title = $request->title;
+        $data->save();
+        $data->subMainMenu()->attach($request->sub_main_menus_id);
+
         return $this->sendResponse($data, 'successful create data ');
     }
 
@@ -53,11 +54,12 @@ class TagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tags $tags)
+    public function update(Request $request, $id)
     {
+            $tags = Tags::find($id);
             $tags->title= $request->title;
-        
             $tags->save();
+            $tags->subMainMenu()->sync($request->sub_main_menus_id);
 
           return $this->sendResponse($tags, 'successful update data');
     }
@@ -68,8 +70,10 @@ class TagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tags $tags)
+    public function destroy($id)
     {
+        $tags =  Tags::find($id);
+        $tags->subMainMenu()->detach();
         $tags->delete();
 
         return $this->sendResponse('', 'successful delete data');

@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('sub_menu_tags', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tags_id');
-            $table->unsignedBigInteger('sub_main_menu_id');
+            $table->foreign('tags_id')->references('id')->on('tags')->onDelete('cascade');
+            $table->unsignedBigInteger('sub_main_menus_id');
+            $table->foreign('sub_main_menus_id')->references('id')->on('sub_main_menus')->onDelete('cascade');
             $table->timestamps();
-
              
         });
     }

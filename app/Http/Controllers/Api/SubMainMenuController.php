@@ -15,7 +15,7 @@ class SubMainMenuController extends Controller
      */
     public function index()
     {
-        $data = SubMainMenu::all();
+        $data = SubMainMenu::with('tags','mainMenu')->get();
         return $this->sendResponse($data, 'successful get all data ');
     }
 
@@ -27,12 +27,18 @@ class SubMainMenuController extends Controller
      */
     public function store(Request $request)
     {
-         $data = SubMainMenu::create([
-            'title_fitur' => $request->title_fitur,
-            'content' => $request->content,
-            'main_menu_id' => $request->main_menu_id
-        ]);
+        //  $data = SubMainMenu::create([
+        //     'title_fitur' => $request->title_fitur,
+        //     'content' => $request->content,
+        //     'main_menu_id' => $request->main_menu_id
+        // ]);
       
+        $data = new SubMainMenu();
+        $data->title_fitur = $request->title;
+        $data->content = $request->content;
+        $data->main_menu_id = $request->main_menu_id;
+        $data->save();
+        $data->tags()->attach($request->tags);
         return $this->sendResponse($data, 'successful create data ');
     }
 
@@ -42,8 +48,9 @@ class SubMainMenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(SubMainMenu $subMainMenu)
+    public function show($id)
     {
+        $subMainMenu = SubMainMenu::with('tags', 'mainMenu')->where('id', $id)->get();
         return $this->sendResponse($subMainMenu, 'successful get detail data ');
     }
 
@@ -54,13 +61,15 @@ class SubMainMenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SubMainMenu  $subMainMenu)
+    public function update(Request $request, $id)
     {
          
-          $subMainMenu->title_fitur = $request->title_fitur;
-           $subMainMenu->content = $request->content;
+            $subMainMenu = SubMainMenu::find($id);
+            $subMainMenu->title_fitur = $request->title;
+            $subMainMenu->content = $request->content;
             $subMainMenu->main_menu_id = $request->main_menu_id;
             $subMainMenu->save();
+            $subMainMenu->tags()->sync($request->tags);
 
           return $this->sendResponse($subMainMenu, 'successful update data');
     }
@@ -71,8 +80,10 @@ class SubMainMenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SubMainMenu $subMainMenu)
+    public function destroy($id)
     {
+        $subMainMenu=  SubMainMenu::find($id);
+        $subMainMenu->tags()->detach();
         $subMainMenu->delete();
 
         return $this->sendResponse('', 'successful delete data');
