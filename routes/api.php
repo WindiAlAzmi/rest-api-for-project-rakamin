@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AnswerController;
+use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\BenefitController;
 use App\Http\Controllers\Api\DiskonController;
 use App\Http\Controllers\Api\MainMenuController;
@@ -33,3 +34,4 @@ Route::apiResource('tags', TagsController::class);
 Route::apiResource('questions', QuestionController::class);
 Route::apiResource('answer', AnswerController::class);
 Route::apiResource('benefit', BenefitController::class);
+Route::apiResource('articles', ArticleController::class);
